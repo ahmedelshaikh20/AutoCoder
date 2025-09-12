@@ -1,2 +1,2 @@
 # AutoCoder
-The Auto Coder is an automated code genertaion tool designed to speed up the software development process by genertaing boilerplate code , templates and other repetitive structures based on issues and predfined patterns
+The Auto Coder is an advanced automated code generation tool specifically designed to accelerate the software development process. It helps developers by generating boilerplate code, reusable templates, and other repetitive programming structures automatically, based on predefined patterns, coding standards, and documented issues, thereby improving efficiency, productivity, and overall code quality.
