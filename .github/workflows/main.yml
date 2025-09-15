@@ -12,25 +12,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Print Issue Information
-        env:
-          ISSUE_NUMBER: ${{ github.event.issue.number }}
-          ISSUE_TITLE: ${{ github.event.issue.title }}
-          ISSUE_BODY: ${{ github.event.issue.body }}
-          ISSUE_LABELS: ${{ toJSON(github.event.issue.labels) }}
-          ISSUE_ASSIGNEES: ${{ toJSON(github.event.issue.assignees) }}
         run: |
           echo "Issue Number: ${{ github.event.issue.number }}"
           echo "Issue Title: ${{ github.event.issue.title }}"
           echo "Issue Body: ${{ github.event.issue.body }}"
-          
-          echo "Issue Labels:"
-          # This loop will print the name of each label
-          for label in ${{ toJSON(github.event.issue.labels) }}; do
-            echo "- ${{ fromJSON(label).name }}"
-          done
-          
-          echo "Issue Assignees:"
-          # This loop will print the login of each assignee
-          for assignee in ${{ toJSON(github.event.issue.assignees) }}; do
-            echo "- ${{ fromJSON(assignee).login }}"
-          done
+          echo "Issue Labels: ${{ join(github.event.issue.labels.*.name, ', ') }}"
+          echo "Issue Assignees: ${{ join(github.event.issue.assignees.*.login, ', ') }}"
