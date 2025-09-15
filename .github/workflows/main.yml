@@ -1,9 +1,24 @@
-name: hello_workflow
-on: [push]
+name: Access Issue Information
+on: 
+  issues:
+        types: [opened, reopened]
 jobs:
-  print-hello:
+  access_issue_info:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - name: Hello world using echo
-        run: echo "Hello, world"
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      - name: Print Issue Information
+        env:
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_LABELS: ${{ toJSON(github.event.issue.labels) }}
+          ISSUE_ASSIGNEES: ${{ toJSON(github.event.issue.assignees) }}
+        run: |
+          echo "Issue Number: $ISSUE_NUMBER"
+          echo "Issue Title: $ISSUE_TITLE"
+          echo "Issue Body: $ISSUE_BODY"
+          echo "Issue Labels: $ISSUE_LABELS"
+          echo "Issue Assignees: $ISSUE_ASSIGNEES"
